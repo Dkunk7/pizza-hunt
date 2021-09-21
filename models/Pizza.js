@@ -4,10 +4,14 @@ const dateFormat = require(`../utils/dateFormat`);
 const PizzaSchema = new Schema(
     {
         pizzaName: {
-            type: String
+            type: String,
+            required: true, // You could do this instead of "true" for a custom validation message: "You need to proved a pizza name!"
+            trim: true
         },
         createdBy: {
-            type: String
+            type: String,
+            required: true,
+            trim: true
         },
         createdAt: {
             type: Date,
@@ -16,6 +20,8 @@ const PizzaSchema = new Schema(
         },
         size: {
             type: String,
+            require: true, // If you want a custom error message with enum, you need to use Mongoose's 'validate' option.
+            enum: [`Personal`, `Small`, `Medium`, `Large`, `Extra Large`],
             default: `Large`
         },
         comments: [
